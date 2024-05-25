@@ -110,6 +110,12 @@ app.get("/get_user/:id", (req, res) => {
     });
 });
 
+app.get("/test", (req, res) => {
+    res.json({
+        active: true
+    });
+});
+
 app.post("/set_user_id_in_unity", (req, res) => {
     const { id } = req.body;
     currentUserId = id;
