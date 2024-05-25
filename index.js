@@ -1,12 +1,13 @@
 const express = require("express");
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
-const mysql = require("mysql");
+//const mysql = require("mysql");
+const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 
 const TOKEN = "7179921695:AAFfUHDE7XYnk0pvHuipXV2icp2PhKcD3NA";
 const bot = new TelegramBot(TOKEN, { polling: true });
-const port = process.env.PORT || 5000;
+const port = 3333;
 const gameName = "moonton_game";
 const queries = {};
 
@@ -14,18 +15,22 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'MoontonFixed')));
 app.use(bodyParser.json());
 
+
 // MySQL connection
+
 const db = mysql.createConnection({
-    host: "",
-    user: "",
-    password: "",
-    database: ""
+    host: "viaduct.proxy.rlwy.net",
+    user: "root",
+    password: "QOrZKuMZbuQhfYYVjslMedJcwckgtnjP",
+    database: "railway",
+    port: 44856 
 });
 
 db.connect(err => {
     if (err) throw err;
     console.log("MySQL connected...");
 });
+
 
 let currentUserId = null;  // For simplicity, using a global variable
 
@@ -132,5 +137,5 @@ app.post("/update_user_data", (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log("Server running on port ${ port }");
+    console.log(`Server running on port ${ port }`);
 });
