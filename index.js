@@ -89,7 +89,7 @@ function registerUser(userId, username) {
 app.post("/register", (req, res) => {
     const { id, username } = req.body;
     registerUser(id, username);
-    res.json({ message: 'User registered successfully' });
+    //res.json({ message: 'User registered successfully' });
 });
 
 app.get("/get_user/:id", (req, res) => {
