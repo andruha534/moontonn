@@ -11,15 +11,15 @@ const gameName = "moonton_game";
 const queries = {};
 
 const app = express();
-app.use(express.static(path.join(__dirname, 'Moonton')));
+app.use(express.static(path.join(__dirname, 'MoontonFixed')));
 app.use(bodyParser.json());
 
 // MySQL connection
 const db = mysql.createConnection({
-    host: "roundhouse.proxy.rlwy.net",
-    user: "root",
-    password: "qPJyKwsTsxoYUGmDJqsjvTHUNvoIFmdw",
-    database: "railway"
+    host: "",
+    user: "",
+    password: "",
+    database: ""
 });
 
 db.connect(err => {
@@ -51,7 +51,7 @@ bot.on("callback_query", function (query) {
         });
     } else {
         queries[query.id] = query;
-        let gameurl = "https://andruha534.github.io/moonton2.2/";
+        let gameurl = "";
         bot.answerCallbackQuery(query.id, {
             url: gameurl
         });
@@ -134,4 +134,3 @@ app.post("/update_user_data", (req, res) => {
 app.listen(port, () => {
     console.log("Server running on port ${ port }");
 });
-
