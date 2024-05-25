@@ -2,12 +2,11 @@ const express = require("express");
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
 const mysql = require("mysql2");
-require('dotenv').config();
 const bodyParser = require("body-parser");
 
 const TOKEN = "7179921695:AAFfUHDE7XYnk0pvHuipXV2icp2PhKcD3NA";
 const bot = new TelegramBot(TOKEN, { polling: true });
-const port = 3333;
+const port = process.env.PORT || 3000;
 const gameName = "moonton_game";
 const queries = {};
 
@@ -15,21 +14,6 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'MoontonFixed')));
 app.use(bodyParser.json());
 
-
-let server;
-
-const isProduction = process.env.NODE_ENV === 'production';
-if (isProduction) {
-    const privateKey = fs.readFileSync('ssl/private.key', 'utf8');
-    const certificate = fs.readFileSync('ssl/certificate.crt', 'utf8');
-    const httpsOptions = {
-        key: privateKey,
-        cert: certificate
-    };
-    server = https.createServer(httpsOptions, app);
-} else {
-    server = app;
-}
 
 // MySQL connection
 
@@ -102,13 +86,13 @@ function registerUser(userId, username) {
 }
 
 // API endpoints
-server.post("/register", (req, res) => {
+app.post("/register", (req, res) => {
     const { id, username } = req.body;
     registerUser(id, username);
     res.json({ message: 'User registered successfully' });
 });
 
-server.get("/get_user/:id", (req, res) => {
+app.get("/get_user/:id", (req, res) => {
     const id = req.params.id;
     db.query('SELECT * FROM players WHERE id = ?', [id], (err, result) => {
         if (err) throw err;
@@ -126,13 +110,13 @@ server.get("/get_user/:id", (req, res) => {
     });
 });
 
-server.post("/set_user_id_in_unity", (req, res) => {
+app.post("/set_user_id_in_unity", (req, res) => {
     const { id } = req.body;
     currentUserId = id;
     res.json({ message: 'User ID set in Unity' });
 });
 
-server.get("/get_current_user_id", (req, res) => {
+app.get("/get_current_user_id", (req, res) => {
     if (currentUserId !== null) {
         res.json({ id: currentUserId });
     } else {
@@ -140,7 +124,7 @@ server.get("/get_current_user_id", (req, res) => {
     }
 });
 
-server.post("/update_user_data", (req, res) => {
+app.post("/update_user_data", (req, res) => {
     const { id, money, level, currentXP } = req.body;
     const query = 'UPDATE players SET money = ?, level = ?, currentXP = ? WHERE id = ?';
 
@@ -151,6 +135,6 @@ server.post("/update_user_data", (req, res) => {
 });
 
 // Start the server
-server.listen(port, () => {
+app.listen(port, () => {
     console.log(`Server running on port ${ port }`);
 });
