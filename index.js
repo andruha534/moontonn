@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 const TOKEN = "7179921695:AAFfUHDE7XYnk0pvHuipXV2icp2PhKcD3NA";
 const bot = new TelegramBot(TOKEN, { polling: true });
-const port = process.env.PORT || 3000;
+const port = process.env.SSL_PORT || 3000;
 const gameName = "moonton_game";
 const queries = {};
 
