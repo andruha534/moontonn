@@ -5,7 +5,7 @@ const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 
 const TOKEN = "7179921695:AAFfUHDE7XYnk0pvHuipXV2icp2PhKcD3NA";
-const bot = new TelegramBot(TOKEN, { polling: true });
+const bot = new TelegramBot(TOKEN, { polling: false });
 const port = process.env.PORT || 3000;
 const gameName = "moonton_game";
 const queries = {};
@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 
 
 // MySQL connection
-
 const db = mysql.createConnection({
     host: "viaduct.proxy.rlwy.net",
     user: "root",
@@ -134,12 +133,14 @@ app.post("/update_user_data", (req, res) => {
     });
 });
 
+
 app.get("/", (req, res) => {
-    // Index.html
-    res.sendFile(path.join(__dirname, "index.html"));
+
+    res.sendFile(path.join(__dirname, "/dist/index.html"));
 });
 
-app.use('/Build', express.static(path.join(__dirname, 'Build')));
+
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Start the server
 app.listen(port, () => {
