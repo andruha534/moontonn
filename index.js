@@ -5,7 +5,7 @@ const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 
 const TOKEN = "7179921695:AAFfUHDE7XYnk0pvHuipXV2icp2PhKcD3NA";
-const bot = new TelegramBot(TOKEN, { polling: true });
+const bot = new TelegramBot(TOKEN, { polling: false });
 const port = process.env.PORT || 3000;
 const gameName = "moonton_game";
 const queries = {};
