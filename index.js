@@ -55,7 +55,7 @@ bot.on("callback_query", function (query) {
         });
     } else {
         queries[query.id] = query;
-        let gameurl = "";
+        let gameurl = "https://moontonn-production.up.railway.app/";
         bot.answerCallbackQuery(query.id, {
             url: gameurl
         });
