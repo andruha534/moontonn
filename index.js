@@ -110,7 +110,6 @@ app.get("/get_user/:id", (req, res) => {
     });
 });
 
-
 app.post("/set_user_id_in_unity", (req, res) => {
     const { id } = req.body;
     currentUserId = id;
@@ -133,6 +132,11 @@ app.post("/update_user_data", (req, res) => {
         if (err) throw err;
         res.json({ message: 'User data updated successfully' });
     });
+});
+
+app.get("/", (req, res) => {
+    // Index.html
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // Start the server
