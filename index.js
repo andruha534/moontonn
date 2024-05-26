@@ -139,6 +139,8 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.use('/Build', express.static(path.join(__dirname, 'Build')));
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running on port ${ port }`);
