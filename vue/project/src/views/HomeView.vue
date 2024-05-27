@@ -37,7 +37,7 @@
       </div>
 
       <div class="tap">
-        <img src="/tap.png">
+        <img src="/tap.png" >
       </div>
 
     </div>
@@ -167,18 +167,16 @@ main {
 
     .tap {
       position: relative;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 1/1;
       display: flex;
       align-items: flex-start;
       justify-content: center;
       margin-top: 50px;
-      cursor: pointer;
+      
 
       img {
         aspect-ratio: 1/1;
         width: 30vh;
+        cursor: pointer;
         height: auto;
       }
     }

@@ -43,9 +43,9 @@ main {
 @font-face {
   font-family: 'Century Gothic';
   src: local('Century Gothic Regular'), local('Century-Gothic-Regular'),
-      url('CenturyGothic.woff2') format('woff2'),
-      url('CenturyGothic.woff') format('woff'),
-      url('CenturyGothic.ttf') format('truetype');
+      url('../CenturyGothic.woff2') format('woff2'),
+      url('../CenturyGothic.woff') format('woff'),
+      url('../CenturyGothic.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
@@ -53,9 +53,9 @@ main {
 @font-face {
   font-family: 'Century Gothic';
   src: local('Century Gothic Bold'), local('Century-Gothic-Bold'),
-      url('CenturyGothic-Bold.woff2') format('woff2'),
-      url('CenturyGothic-Bold.woff') format('woff'),
-      url('CenturyGothic-Bold.ttf') format('truetype');
+      url('../CenturyGothic-Bold.woff2') format('woff2'),
+      url('../CenturyGothic-Bold.woff') format('woff'),
+      url('../CenturyGothic-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
