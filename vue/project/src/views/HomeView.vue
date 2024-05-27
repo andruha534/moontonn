@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, defineProps } from 'vue'
 
 // Tabs
 
@@ -101,11 +101,10 @@ function tap(event) {
 
 }
 
-defineProps({
-  id: {
-    type: String,
-    required: true
-  }
+const { id, user_data } = defineProps(['id', 'user_data'])
+
+onMounted(() => {
+  console.log(user_data.value);
 })
 
 </script>

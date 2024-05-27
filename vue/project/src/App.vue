@@ -15,6 +15,8 @@ const user_id = urlParams.get('id');
 
 const hasNoErrors = ref(true);
 
+const user_data = ref({});
+
 if ( hasIdParam() ){
 
   const fetchData = async () => {
@@ -23,17 +25,16 @@ if ( hasIdParam() ){
 
     try {
       const res = await fetch(endpoint);
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
       const json = await res.json();
-      console.log(json);
 
-      if ( json.id ){
+      if ( json.id && json.id != undefined ){
         hasNoErrors.value = true;
+        user_data.value = json;
       } else {
         hasNoErrors.value = false;
       }
+
+
     } catch (err) {
       throw new Error(err.message);
     } finally {}
@@ -47,10 +48,10 @@ if ( hasIdParam() ){
 
 <template>
   <RouterView v-if="hasNoErrors" v-slot="{ Component, route }">
-      <component :is="Component" :id="user_id" v-bind="route.params" />
+      <component :is="Component" :id="user_id" v-bind="route.params" :user_data="user_data"/>
     </RouterView>
 
-  <main v-if="!hasNoErrors">
+  <main v-if="!hasNoErrors"> 
       <div class="error-notice">
         User login required, try logging in again from the game's official channel.
 
