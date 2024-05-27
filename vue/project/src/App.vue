@@ -15,8 +15,7 @@ const user_id = urlParams.get('id');
 </script>
 
 <template>
-  <span style="color:white;">{{ user_id }}</span>
-  <RouterView v-if="hasIdParam()" />
+  <RouterView v-if="hasIdParam()" :id="user_id"/>
 
   <main v-if="!hasIdParam()">
       <div class="error-notice">

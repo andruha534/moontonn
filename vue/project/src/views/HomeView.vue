@@ -1,6 +1,6 @@
 <template>
   <main>
-
+<span style="color:white">{{ id }}</span>
     <div class="tabs">
       <div
         v-for="(tab, index) in tabs"
