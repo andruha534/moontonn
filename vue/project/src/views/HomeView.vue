@@ -21,13 +21,13 @@
           <div class="coinImg">
             <img src="/moons_coin_1.svg">
           </div>
-          <div class="num">0</div>
+          <div class="num">{{ num }}</div>
         </div>
 
         <div class="bar">
           <div class="info">
-            <div>Level <span>1</span></div>
-            <div>Moons <span>0/40</span></div>
+            <div>Level <span>{{ level }}</span></div>
+            <div>Moons <span>{{ moons }}/{{ level_ceil }}</span></div>
           </div>
           <div class="content">
             <div :style="{ width: progress + '%' }"></div>
@@ -37,7 +37,13 @@
       </div>
 
       <div class="tap">
-        <img src="/tap.png" >
+        <img 
+        src="/tap.png" 
+        @touchstart="ontap" 
+        @touchend="tap"
+        @mousedown="ontap" 
+        @mouseup="tap"
+        >
       </div>
 
     </div>
@@ -52,6 +58,8 @@
 <script setup>
 import { ref } from 'vue'
 
+// Tabs
+
 const tabs = ref(['Game', 'Exchange'])
 const activeTab = ref(0)
 
@@ -59,8 +67,33 @@ const setActiveTab = (index) => {
   activeTab.value = index
 }
 
-const progress = ref(1)
+// Progress
+
+const num = ref(0);
+
+const level = ref(1);
+
+const moons = ref(0);
+
+const level_ceil = ref(level.value * 40);
+
+const progress = ref(1);
+
+function ontap(event) {
+  event.currentTarget.classList.add('scaled');
+}
+
+function tap(event) {
+  event.currentTarget.classList.remove('scaled');
+  num.value = Number(num.value) + 1;
+  moons.value = num.value;
+  progress.value = Number(moons.value / level_ceil.value) * 100;
+}
+
+
 </script>
+
+
 
 <style scoped lang="scss">
 
@@ -178,6 +211,11 @@ main {
         width: 30vh;
         cursor: pointer;
         height: auto;
+        transition: transform 0.05s;
+
+        &.scaled {
+          transform: scale(1.05);
+        }
       }
     }
   }
