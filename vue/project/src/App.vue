@@ -17,6 +17,8 @@ const hasNoErrors = ref(true);
 
 const user_data = ref({});
 
+const fetched = ref(false);
+
 if ( hasIdParam() ){
 
   const fetchData = async () => {
@@ -29,6 +31,7 @@ if ( hasIdParam() ){
 
       if ( json.id && json.id != undefined ){
         hasNoErrors.value = true;
+        fetched.value = true;
         user_data.value = json;
       } else {
         hasNoErrors.value = false;
@@ -48,7 +51,7 @@ if ( hasIdParam() ){
 
 <template>
 
-  <RouterView v-if="hasNoErrors" v-slot="{ Component, route }">
+  <RouterView v-if="hasNoErrors && fetched" v-slot="{ Component, route }">
       <component :is="Component" :id="user_id" v-bind="route.params" :user_data="user_data"/>
     </RouterView>
 

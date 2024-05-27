@@ -94,6 +94,7 @@ app.post("/register", (req, res) => {
 app.get("/get_user/:id", (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    
     const id = req.params.id;
     db.query('SELECT * FROM players WHERE id = ?', [id], (err, result) => {
         if (err) throw err;
@@ -106,7 +107,7 @@ app.get("/get_user/:id", (req, res) => {
                 currentXP: result[0].currentXP
             });
         } else {
-            res.status(404).json({ message: 'User not found' });
+            res.json({ message: 'User not found' });
         }
     });
 });
@@ -126,6 +127,9 @@ app.get("/get_current_user_id", (req, res) => {
 });
 
 app.post("/update_user_data", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     const { id, money, level, currentXP } = req.body;
     const query = 'UPDATE players SET money = ?, level = ?, currentXP = ? WHERE id = ?';
 

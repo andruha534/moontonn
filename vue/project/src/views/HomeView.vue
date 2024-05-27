@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineProps } from 'vue'
+import { ref, onMounted, defineProps, watch } from 'vue'
 
 // Tabs
 
@@ -75,11 +75,8 @@ const moons = ref(0);
 
 const level_ceil = ref(level.value * 20);
 
-const progress = ref(1);
+const progress = ref(Number(moons.value / level_ceil.value) * 100);
 
-progress.value = Number(moons.value / level_ceil.value) * 100;
-
-const xp = ref(0);
 
 function ontap(event) {
   event.currentTarget.classList.add('scaled');
@@ -89,7 +86,6 @@ function tap(event) {
   event.currentTarget.classList.remove('scaled');
   num.value = Number(num.value) + 1;
   moons.value = Number(moons.value) + 1;
-  xp.value = Number(xp.value) + 1;
 
   if ( moons.value > level_ceil.value ) {
     level.value ++;
@@ -99,13 +95,29 @@ function tap(event) {
   progress.value = Number(moons.value / level_ceil.value) * 100;
   level_ceil.value = level.value * 20;
 
+  if ([1, 3, 5, 7, 9, 0].includes(Number(String(num.value).slice(-1)))) {
+      
+  }
+
 }
 
 const { id, user_data } = defineProps(['id', 'user_data'])
 
+watch(
+  () => user_data,
+  (d) => {
+    if (d) {
+      level.value = d.level;
+      num.value = d.money;
+      moons.value = d.currentXP;
+      level_ceil.value = level.value * 20;
+      progress.value = Number(moons.value / level_ceil.value) * 100;
+    }
+  },
+  { immediate: true }
+);
 
 </script>
-
 
 
 
