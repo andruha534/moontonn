@@ -4,22 +4,22 @@ import { RouterLink, RouterView, useRouter } from 'vue-router'
 const router = useRouter()
 
 const hasIdParam = () => {
-  const params = router.currentRoute.value.params
-  return params && params.id
+  let urlParams = new URLSearchParams(window.location.search);
+  return urlParams.has('id') && urlParams.get('id').length
 }
-
-const ErrorView = () => import('./views/ErrorView.vue');
-
-
 
 </script>
 
 <template>
+  <RouterView v-if="hasIdParam()" />
 
-  <RouterView v-if="hasIdParam" :key="$route.fullPath" />
-  <ErrorView v-else :key="$route.fullPath" />
+  <main v-if="!hasIdParam()">
+      <div class="error-notice">
+          Something went wrong, try again.
+      </div>
+  </main>
 
-  <nav>
+  <nav v-if="hasIdParam()">
 
     <RouterLink 
     activeClass="active"
@@ -132,6 +132,18 @@ const ErrorView = () => import('./views/ErrorView.vue');
 
     }
   } 
+
+  main {
+    .error-notice {
+        background: #25252578;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+        font-size: 18px;
+        color: #EFEFEF;
+        border-radius: 10px;
+    }
+}
 </style>
 
 

@@ -219,10 +219,12 @@ main {
 
       img {
         aspect-ratio: 1/1;
-        width: 30vh;
+        width: calc(100vh - 515px);
+        min-width: 200px;
         cursor: pointer;
         height: auto;
         transition: transform 0.05s;
+        max-width: 290px;
 
         &.scaled {
           transform: scale(1.05);
