@@ -121,7 +121,7 @@ app.get("/get_current_user_id", (req, res) => {
     if (currentUserId !== null) {
         res.json({ id: currentUserId });
     } else {
-        res.status(404).json({ message: 'No user ID found' });
+        res.json({ message: 'No user ID found' });
     }
 });
 

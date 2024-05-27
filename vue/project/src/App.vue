@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
 
 const router = useRouter()
 
@@ -12,13 +13,33 @@ let urlParams = new URLSearchParams(window.location.search);
 
 const user_id = urlParams.get('id');
 
-const hasNoErrors = false;
+const hasNoErrors = ref(true);
 
 if ( hasIdParam() ){
 
-  const endpoint = import.meta.env.VITE_API_URL + `/get_user/${user_id}`;
+  const fetchData = async () => {
+    
+    const endpoint = `${import.meta.env.VITE_API_URL}/get_user/${user_id}`;
 
-  console.log(endpoint);
+    try {
+      const res = await fetch(endpoint);
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      const json = await res.json();
+      console.log(json);
+
+      if ( json.id ){
+        hasNoErrors.value = true;
+      } else {
+        hasNoErrors.value = false;
+      }
+    } catch (err) {
+      throw new Error(err.message);
+    } finally {}
+  }
+
+  onMounted(fetchData);
 
 } 
 
