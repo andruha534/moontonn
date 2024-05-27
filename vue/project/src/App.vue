@@ -12,12 +12,24 @@ let urlParams = new URLSearchParams(window.location.search);
 
 const user_id = urlParams.get('id');
 
+const hasNoErrors = false;
+
+if ( hasIdParam() ){
+
+  const endpoint = import.meta.env.VITE_API_URL + `/get_user/${user_id}`;
+
+  console.log(endpoint);
+
+} 
+
 </script>
 
 <template>
-  <RouterView v-if="hasIdParam()" :id="user_id"/>
+  <RouterView v-if="hasNoErrors" v-slot="{ Component, route }">
+      <component :is="Component" :id="user_id" v-bind="route.params" />
+    </RouterView>
 
-  <main v-if="!hasIdParam()">
+  <main v-if="!hasNoErrors">
       <div class="error-notice">
         User login required, try logging in again from the game's official channel.
 
@@ -25,7 +37,7 @@ const user_id = urlParams.get('id');
       </div>
   </main>
 
-  <nav v-if="hasIdParam()">
+  <nav v-if="hasNoErrors">
 
     <RouterLink 
     activeClass="active"

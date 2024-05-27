@@ -92,6 +92,8 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/get_user/:id", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const id = req.params.id;
     db.query('SELECT * FROM players WHERE id = ?', [id], (err, result) => {
         if (err) throw err;
