@@ -39,8 +39,8 @@
       <div class="tap">
         <img 
         src="/tap.png" 
-        @touchstart="ontap" 
-        @touchend="tap"
+        @mousedown="ontap" 
+        @mouseup="tap"
         >
       </div>
 
@@ -97,7 +97,7 @@ function tap(event) {
   progress.value = Number(moons.value / level_ceil.value) * 100;
   level_ceil.value = level.value * 40;
 
-
+  
 
 }
 
