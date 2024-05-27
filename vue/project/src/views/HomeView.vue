@@ -96,9 +96,25 @@ function tap(event) {
   level_ceil.value = level.value * 20;
 
   if ([1, 3, 5, 7, 9, 0].includes(Number(String(num.value).slice(-1)))) {
-      
+    updateUserData();
   }
 
+}
+
+function updateUserData(){
+  const endpoint = `${import.meta.env.VITE_API_URL}/update_user_data`;
+  fetch(endpoint, {
+    method: "POST", 
+    body: JSON.stringify({
+      "money": num.value, 
+      "level": level.value, 
+      "currentXP": moons.value, 
+      "id": id
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
 }
 
 const { id, user_data } = defineProps(['id', 'user_data'])
