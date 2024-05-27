@@ -15,7 +15,7 @@ const hasIdParam = () => {
 
   <main v-if="!hasIdParam()">
       <div class="error-notice">
-          Something went wrong, try again.
+        User login required, try logging in again from the game's official channel.
       </div>
   </main>
 
@@ -135,13 +135,14 @@ const hasIdParam = () => {
 
   main {
     .error-notice {
-        background: #25252578;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 20px;
-        font-size: 18px;
-        color: #EFEFEF;
-        border-radius: 10px;
+      background: rgba(37, 37, 37, 0.75);
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      font-size: 18px;
+      color: #EFEFEF;
+      border-radius: 10px;
+      line-height: 150%;
     }
 }
 </style>
