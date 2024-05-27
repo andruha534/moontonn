@@ -19,7 +19,7 @@
 
         <div class="score">
           <div class="coinImg">
-            <img src="/moons_coin_1.svg">
+            <img src="/moons_coin_1.svg" draggable="false">
           </div>
           <div class="num">{{ num }}</div>
         </div>
@@ -41,6 +41,7 @@
         src="/tap.png" 
         @mousedown="ontap" 
         @mouseup="tap"
+        draggable="false"
         >
       </div>
 

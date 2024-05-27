@@ -8,14 +8,21 @@ const hasIdParam = () => {
   return urlParams.has('id') && urlParams.get('id').length
 }
 
+let urlParams = new URLSearchParams(window.location.search);
+
+const user_id = urlParams.get('id');
+
 </script>
 
 <template>
+  <span style="color:white;">{{ user_id }}</span>
   <RouterView v-if="hasIdParam()" />
 
   <main v-if="!hasIdParam()">
       <div class="error-notice">
         User login required, try logging in again from the game's official channel.
+
+        <a href="https://t.me/moontongames_bot">Play</a>
       </div>
   </main>
 
@@ -143,6 +150,17 @@ const hasIdParam = () => {
       color: #EFEFEF;
       border-radius: 10px;
       line-height: 150%;
+
+      a {
+        color: #FFFFFF;
+        text-decoration: none;
+        display: block;
+        padding: 10px 30px;
+        border-radius: 10px;
+        background: #668CAF;
+        width: max-content;
+        margin-top: 15px;
+      }
     }
 }
 </style>
