@@ -95,9 +95,7 @@ function tap(event) {
   progress.value = Number(moons.value / level_ceil.value) * 100;
   level_ceil.value = level.value * 20;
 
-  if ([1, 3, 5, 7, 9, 0].includes(Number(String(num.value).slice(-1)))) {
-    updateUserData();
-  }
+  updateUserData();
 
 }
 
