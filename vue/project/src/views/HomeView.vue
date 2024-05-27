@@ -73,9 +73,11 @@ const level = ref(1);
 
 const moons = ref(0);
 
-const level_ceil = ref(level.value * 40);
+const level_ceil = ref(level.value * 20);
 
 const progress = ref(1);
+
+progress.value = Number(moons.value / level_ceil.value) * 100;
 
 const xp = ref(0);
 
@@ -95,19 +97,15 @@ function tap(event) {
   }
 
   progress.value = Number(moons.value / level_ceil.value) * 100;
-  level_ceil.value = level.value * 40;
-
-  
+  level_ceil.value = level.value * 20;
 
 }
 
 const { id, user_data } = defineProps(['id', 'user_data'])
 
-onMounted(() => {
-  console.log(user_data.value);
-})
 
 </script>
+
 
 
 

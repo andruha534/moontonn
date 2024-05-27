@@ -47,6 +47,7 @@ if ( hasIdParam() ){
 </script>
 
 <template>
+
   <RouterView v-if="hasNoErrors" v-slot="{ Component, route }">
       <component :is="Component" :id="user_id" v-bind="route.params" :user_data="user_data"/>
     </RouterView>
