@@ -41,8 +41,6 @@
         src="/tap.png" 
         @touchstart="ontap" 
         @touchend="tap"
-        @mousedown="ontap" 
-        @mouseup="tap"
         >
       </div>
 
@@ -79,6 +77,8 @@ const level_ceil = ref(level.value * 40);
 
 const progress = ref(1);
 
+const xp = ref(0);
+
 function ontap(event) {
   event.currentTarget.classList.add('scaled');
 }
@@ -86,8 +86,19 @@ function ontap(event) {
 function tap(event) {
   event.currentTarget.classList.remove('scaled');
   num.value = Number(num.value) + 1;
-  moons.value = num.value;
+  moons.value = Number(moons.value) + 1;
+  xp.value = Number(xp.value) + 1;
+
+  if ( moons.value > level_ceil.value ) {
+    level.value ++;
+    moons.value = 1;
+  }
+
   progress.value = Number(moons.value / level_ceil.value) * 100;
+  level_ceil.value = level.value * 40;
+
+
+
 }
 
 

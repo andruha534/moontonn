@@ -1,10 +1,23 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const hasIdParam = () => {
+  const params = router.currentRoute.value.params
+  return params && params.id
+}
+
+const ErrorView = () => import('./views/ErrorView.vue');
+
+
+
 </script>
 
 <template>
 
-  <RouterView />
+  <RouterView v-if="hasIdParam" :key="$route.fullPath" />
+  <ErrorView v-else :key="$route.fullPath" />
 
   <nav>
 
@@ -57,7 +70,8 @@ import { RouterLink, RouterView } from 'vue-router'
   </nav>
 </template>
 
-<style scoped lang="scss">
+
+<style scoped lang="scss" >
   nav {
     width: 100%;
     height: 73px;
@@ -119,3 +133,5 @@ import { RouterLink, RouterView } from 'vue-router'
     }
   } 
 </style>
+
+
