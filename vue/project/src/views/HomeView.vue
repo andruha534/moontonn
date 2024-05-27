@@ -16,12 +16,28 @@
     <div class="tab" v-if="activeTab === 0">
 
       <div class="progress">
+
         <div class="score">
           <div class="coinImg">
             <img src="/moons_coin_1.svg">
           </div>
           <div class="num">0</div>
         </div>
+
+        <div class="bar">
+          <div class="info">
+            <div>Level <span>1</span></div>
+            <div>Moons <span>0/40</span></div>
+          </div>
+          <div class="content">
+            <div :style="{ width: progress + '%' }"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tap">
+        <img src="/tap.png">
       </div>
 
     </div>
@@ -42,6 +58,8 @@ const activeTab = ref(0)
 const setActiveTab = (index) => {
   activeTab.value = index
 }
+
+const progress = ref(1)
 </script>
 
 <style scoped lang="scss">
@@ -80,6 +98,8 @@ main {
   }
 
   .tab {
+
+
     .progress {
       .score {
         display: flex;
@@ -101,6 +121,65 @@ main {
         }
 
 
+      }
+    }
+
+    .bar {
+      margin-top: 10px;
+
+      .info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        div {
+          font-size: 13px;
+          color: #8D8D8D;
+
+          span {
+            color: #EFEFEF;
+          }
+        }
+      }
+
+      .content {
+        background: #2D2D2D;
+        width: 100%;
+        position: relative;
+        height: 13px;
+        border-radius: 6.5px;
+        overflow: hidden;
+
+        div {
+          content: "";
+          background: #E9E9E9;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-radius: 6.5px;
+          transition: width 0.5s;
+        }
+      }
+
+    }
+
+    .tap {
+      position: relative;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-top: 50px;
+      cursor: pointer;
+
+      img {
+        aspect-ratio: 1/1;
+        width: 30vh;
+        height: auto;
       }
     }
   }
