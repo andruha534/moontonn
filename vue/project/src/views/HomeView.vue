@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="tab" role="Game">
+    <div class="tab" v-if="activeTab === 0">
 
       <div class="progress">
         <div class="score">
@@ -26,7 +26,9 @@
 
     </div>
 
-    <div class="tab" role="Exchange"></div>
+    <div class="tab" v-if="activeTab === 1">
+
+    </div>
 
   </main>
 </template>
@@ -34,13 +36,9 @@
 <script setup>
 import { ref } from 'vue'
 
-// Список вкладок
 const tabs = ref(['Game', 'Exchange'])
-
-// Активная вкладка
 const activeTab = ref(0)
 
-// Функция для установки активной вкладки
 const setActiveTab = (index) => {
   activeTab.value = index
 }
