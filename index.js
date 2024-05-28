@@ -4,7 +4,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 
-const TOKEN = "YOUR_TELEGRAM_BOT_TOKEN";
+const TOKEN = "7179921695:AAFfUHDE7XYnk0pvHuipXV2icp2PhKcD3NA";
 const bot = new TelegramBot(TOKEN, { polling: true });
 const port = process.env.PORT || 3000;
 const gameName = "moonton_game";
