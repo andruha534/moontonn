@@ -108,7 +108,10 @@ function updateUserData(){
       "level": level.value, 
       "currentXP": moons.value, 
       "id": id
-    })
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    }
   })
 }
 
