@@ -1,8 +1,9 @@
 <script setup>
-import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { ref, onMounted, onUpdated } from 'vue'
+import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
+import { ref, onMounted, watch } from 'vue'
 
 const router = useRouter()
+const route = useRoute()
 
 const hasIdParam = () => {
   let urlParams = new URLSearchParams(window.location.search);
@@ -45,7 +46,7 @@ if ( hasIdParam() ){
 
   onMounted(fetchData);
 
-  onUpdated(fetchData);
+  watch(() => route.fullPath, fetchData);
 
 } 
 
