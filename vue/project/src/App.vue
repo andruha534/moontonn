@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUpdated } from 'vue'
 
 const router = useRouter()
 
@@ -44,6 +44,8 @@ if ( hasIdParam() ){
   }
 
   onMounted(fetchData);
+
+  onUpdated(fetchData);
 
 } 
 
